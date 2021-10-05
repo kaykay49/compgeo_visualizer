@@ -33,7 +33,7 @@ signed main(){
         //cout<<u.back().first<<" "<<u.back().second<<'\n';
         while (u.size() >= 2 && is_left(u[u.size() - 2].first, u[u.size() - 2].second, u[u.size() - 1].first, u[u.size() - 1].second, v[i].first, v[i].second) >= 0) {
             u.pop_back();
-            vul.back().setColor(COLOR("white"));
+            vul.back().hide();
             vul.pop_back();
             wait(t);
         }
@@ -50,7 +50,7 @@ signed main(){
     for (int i = 2; i < n; i++) {
         while (l.size() >= 2 && is_left(l[l.size() - 2].first, l[l.size() - 2].second, l[l.size() - 1].first, l[l.size() - 1].second, v[i].first, v[i].second) <= 0) {
             //cout<<"hello\n";
-            if(!m[{l.back(),l[l.size()-2]}]&&!m[{l[l.size()-2],l.back()}]){vll.back().setColor(COLOR("white"));}
+            if(!m[{l.back(),l[l.size()-2]}]&&!m[{l[l.size()-2],l.back()}]){vll.back().hide();}
             l.pop_back();
             vll.pop_back();
             wait(t);
