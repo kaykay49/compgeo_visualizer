@@ -2,7 +2,7 @@
 #include "button.h"
 #include<bits/stdc++.h>
 using namespace simplecpp;
-double t=0.45;
+double t=0.6;
 #define int long long
 #define pb push_back
 map<pair<int, int>, pair<int, int>> mp;
@@ -71,18 +71,18 @@ int earfind(vector<pair<int, int>> v) {
     if (v.size() <= 3)return 1000;
     int k = v.size();
     vector<segment> sv;
-    for (int i = 0; i < k; i++)sv.pb(segment(3 * v[i].first, 3 * v[i].second, 3 * v[(i + 1) % k].first, 3 * v[(i + 1) % k].second));
+    for (int i = 0; i < k; i++)sv.pb(segment(6 * v[i].first, 6 * v[i].second, 6 * v[(i + 1) % k].first, 6 * v[(i + 1) % k].second));
     for (int i = 0; i < k; i++) {
         segment s[2];
         s[0] = segment(v[i].first, v[i].second, v[(i + 2) % k].first, v[(i + 2) % k].second);
         bool cut = 0;
         for (int j = 0; j < k; j++) {
-            s[1] = segment(sv[j].x1 / 3, sv[j].y1 / 3, sv[j].x2 / 3, sv[j].y2 / 3);
+            s[1] = segment(sv[j].x1 / 6, sv[j].y1 / 6, sv[j].x2 / 6, sv[j].y2 / 6);
             if (poi(s)==2){cut = 2;break;}
             if(v[j] == v[i] || v[j] == v[(i + 2) % k] || v[(j + 1) % k] == v[i] || v[(j + 1) % k] == v[(i + 2) % k])continue;
             if(poi(s)==1){cut=1;break;}
         }
-        if (!cut && in(v[i].first+v[(i+1)%k].first+v[(i+2)%k].first,v[i].second+v[(i+1)%k].second+v[(i+2)%k].second,sv))return i;
+        if (!cut && in(2*v[i].first+2*v[(i+1)%k].first+2*v[(i+2)%k].first,2*v[i].second+2*v[(i+1)%k].second+2*v[(i+2)%k].second,sv)&&in(3*v[i].first+3*v[(i+2)%k].first,3*v[i].second+3*v[(i+2)%k].second,sv))return i;
     }
     return -1000;
 }
@@ -105,11 +105,11 @@ signed main(){
     wait(t);
     while (tt--) {
         int x = earfind(v);
-        //cout<<x<<'\n';
         int k = v.size();
         Line l(v[x].first,-v[x].second,v[(x+2)%k].first,-v[(x+2)].second);
         l.imprint();
         wait(t);
+        //getClick();
         vector<pair<int, int>> v1 = v;
         v.clear();
         for (int i = 0; i < k; i++) {
